@@ -10,7 +10,7 @@ const NewCollections = () => {
       const [all_inproducts, setAll_inproducts] = useState([]);    
 
       useEffect(() => {
-           fetch('http://localhost:4000/popularinall')
+           fetch('https://adminecomapp.onrender.com/popularinall')
            .then((response) =>response.json())
            .then((data) =>setAll_inproducts(data))
       }, [])
