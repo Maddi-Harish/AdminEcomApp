@@ -97,7 +97,6 @@
         width: 148px;
         height: 148px;
         border-radius: 12px;
-        
     }
 
     .item-old-price {
@@ -115,13 +114,15 @@
 
 @media (max-width: 500px) {
     .item {
-        width: 185px;
+        width: 165px;
+        
     }
 
     .images-sizes {
-        width: 185px;
-        height: 185px;
+        width: 165px;
+        height: 165px;
         border-radius: 12px;
+        
     }
 
     .item-old-price {

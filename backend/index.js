@@ -12,7 +12,9 @@ const bcrypt = require("bcryptjs");
 
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "https://adminecomapp.onrender.com"
+}));
 
 // Database Connection With MangoDB 
 mongoose.connect("mongodb+srv://harish3333reddy:harish3333reddy@cluster0.b5szdmt.mongodb.net/Ecommerce");
@@ -50,7 +52,7 @@ app.post("/upload", upload.single('product'), (req, res) => {
 
 // Schema for Creating Products.
 
-const Product = mongoose.model("Product", {
+const ProductSchema = new mongoose.Schema({
     id: {
         type: Number,
         required: true,
@@ -78,11 +80,34 @@ const Product = mongoose.model("Product", {
         required: true,  
     }, 
 
-    avaliable: {
+    available: {
         type: Boolean,
         default: true,
     }, 
-})
+});
+
+const Product = mongoose.model("Product", ProductSchema);
+
+
+app.patch('/products/update-images', async (req, res) => {
+    const { updates } = req.body; // Expecting an array of { id, newImageUrl }
+
+    try {
+        const bulkOps = updates.map(product => ({
+            updateOne: {
+                filter: { _id: product.id }, // Use the correct field for the ID
+                update: { $set: { image: product.newImageUrl } }
+            }
+        }));
+
+        const result = await Product.bulkWrite(bulkOps);
+        res.status(200).json({ modifiedCount: result.modifiedCount });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
+
 
 app.post('/addproduct', async (req, res) => {
     let products = await Product.find({});

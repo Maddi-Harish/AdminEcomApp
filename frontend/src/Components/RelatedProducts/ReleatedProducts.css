@@ -96,9 +96,10 @@
 
     .relatedproducts-items{
         margin-top: 30px;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         flex-wrap: wrap; 
-        gap: 60px;
+        gap: 32px;
         justify-content: center;
     }
 
