@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 
 app.use(express.json());
 app.use(cors({
-    origin: ['https://adminecomapp.onrender.com', 'https://ecomzone.netlify.app/']
+    origin: ['https://adminecomapp.onrender.com', 'https://ecomzone.netlify.app']
 }));
 
 // Database Connection With MangoDB 
