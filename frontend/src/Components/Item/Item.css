@@ -114,13 +114,12 @@
 
 @media (max-width: 500px) {
     .item {
-        width: 165px;
-        
+        width: 140px;
     }
 
     .images-sizes {
-        width: 165px;
-        height: 165px;
+        width: 140px;
+        height: 140px;
         border-radius: 12px;
         
     }
