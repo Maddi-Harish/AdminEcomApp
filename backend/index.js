@@ -237,6 +237,9 @@ app.post('/signup', async (req, res) => {
 
      // Nodemailer Code Transporter
      const transporter = nodemailer.createTransport({
+        host : 'smtp.gmail.com',
+        port : 587,
+        secure : true,
         service: 'gmail',
         auth: {
             user: 'ecomzoneproject@gmail.com',
@@ -250,7 +253,7 @@ app.post('/signup', async (req, res) => {
     const imagePathFromDownloads = path.join('C:', 'Users', 'hp', 'Downloads', 'Beige Minimalist Casual New Collection Bag Desktop Prototype (4).png');
 
     const mailOptions = {
-        from: 'ecomzoneproject@gmail.com',
+        from: 'EcomZone <ecomzoneproject@gmail.com>',
         to: user.email,
         subject: 'Welcome to Our Services!',
         html: `
