@@ -7,27 +7,41 @@ const ListProduct = () => {
     const [allProducts, setAllProducts] = useState([]);
     
     const fetchInfo = async () => {
-          await fetch('https://adminecomapp.onrender.com/allproducts')
-          .then((res) => res.json())
-          .then((data) => {setAllProducts(data)});
-    }
+        
+         try {
+            const res = await fetch('https://adminecomapp.onrender.com/allproducts');
+            if (!res.ok) {
+                throw new Error('Failed to fetch products');
+            }
+            const data = await res.json();
+            setAllProducts(data);
+         } catch (error) {
+            console.log('Error fetching products:', error);
+         }
+      };
   
     useEffect(() => {
         fetchInfo();
     }, [])
 
     const remove_product = async (id) => {
-        await fetch('https://adminecomapp.onrender.com/removeproduct', {
-         method: 'POST',
-         headers: {
-            Accept: 'application/json',
-            'Content-Type' : 'application/json',
-         }, 
-         body: JSON.stringify({id:id})
-        })
-
-       await fetchInfo();
-    }
+      try {
+          const res = await fetch('https://adminecomapp.onrender.com/removeproduct', {
+              method: 'POST',
+              headers: {
+                  Accept: 'application/json',
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ id: id }),
+          });
+          if (!res.ok) {
+              throw new Error('Failed to remove product');
+          }
+          await fetchInfo(); // Refresh the product list after removal
+      } catch (error) {
+          console.error('Error removing product:', error);
+      }
+  };
 
      return (
         <div className="list-product">
@@ -43,8 +57,8 @@ const ListProduct = () => {
              <div className="list-all-product">
                 <hr/> 
                  
-                {allProducts.map((product, index) => {
-                    return <> <div key={index} className="list-products-main list-of-product-format">
+                {allProducts.map((product) => {
+                    return <> <div key={product.id} className="list-products-main list-of-product-format">
                         <img src={product.image} className="listproduct-product-image"/>        
                         <p>{product.name}</p>
                         <p>${product.old_price}</p>

@@ -13,7 +13,7 @@ const bcrypt = require("bcryptjs");
 
 app.use(express.json());
 app.use(cors({
-    origin: ['https://adminecomapp.onrender.com', 'https://ecomzone.netlify.app']
+    origin: ['http://localhost:5173', 'https://adminecomapp.onrender.com', 'https://ecomzone.netlify.app/']
 }));
 
 // Database Connection With MangoDB 
@@ -25,6 +25,7 @@ mongoose.connect("mongodb+srv://harish3333reddy:harish3333reddy@cluster0.b5szdmt
 app.get("/", (req, res) => {
     res.send("Express App is Running")  
 })
+
 
 // Image Storage Engine 
 
@@ -87,6 +88,21 @@ const ProductSchema = new mongoose.Schema({
 });
 
 const Product = mongoose.model("Product", ProductSchema);
+
+
+app.get('/allproducts', async (req, res) => {
+    try {
+        // Fetch all products from the database
+        const products = await Product.find(); // This retrieves all products
+
+        // Send the products back as a JSON response
+        res.json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+});
+
 
 
 app.patch('/products/update-images', async (req, res) => {
