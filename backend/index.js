@@ -168,11 +168,11 @@ app.post('/removeproduct', async (req, res) => {
 
 // Creating API for Getting All Products...
 
-app.get('/allproducts', async (req, res) => {
-    let products = await Product.find({});
-    console.log("All Products Fetched");
-    res.send(products);
-})
+// app.get('/allproducts', async (req, res) => {
+//     let products = await Product.find({});
+//     console.log("All Products Fetched");
+//     res.send(products);
+// })
 
 // Schema Creating for User Model.
 
