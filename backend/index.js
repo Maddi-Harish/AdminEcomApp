@@ -240,7 +240,7 @@ app.post('/signup', async (req, res) => {
         service: 'gmail',
         auth: {
             user: 'ecomzoneproject@gmail.com',
-            pass: 'swberpfzljocowqv'
+            pass: 'mkfiwhyzbulgsnfp'
         }
     });
 
