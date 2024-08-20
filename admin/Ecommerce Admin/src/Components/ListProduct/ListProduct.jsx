@@ -58,7 +58,7 @@ const ListProduct = () => {
                 <hr/> 
                  
                 {allProducts.map((product) => {
-                    return <> <div key={product.id} className="list-products-main list-of-product-format">
+                       <div key={product.id} className="list-products-main list-of-product-format">
                         <img src={product.image} className="listproduct-product-image"/>        
                         <p>{product.name}</p>
                         <p>${product.old_price}</p>
@@ -66,9 +66,7 @@ const ListProduct = () => {
                         <p>{product.category}</p>
                         <img onClick={() => {remove_product(product.id)}} className='list-product-icon' src={delete_icon} alt=""/>
                     </div>
-                  <hr/>
-                  </>
-               })}
+                  })}
                 </div>
                 
         </div>
