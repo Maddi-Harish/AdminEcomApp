@@ -250,7 +250,7 @@ app.post('/signup', async (req, res) => {
 
     const imagePath = path.join(__dirname, 'path', 'to', 'your', 'image.png');
 
-    const imagePathFromDownloads = path.join('C:', 'Users', 'hp', 'Downloads', 'Beige Minimalist Casual New Collection Bag Desktop Prototype (4).png');
+    const imagePathFromDownloads = path.join('C:', 'Users', 'hp', 'Downloads', 'Ecom Zone.gif');
 
     const mailOptions = {
         from: 'EcomZone <ecomzoneproject@gmail.com>',
@@ -268,7 +268,7 @@ app.post('/signup', async (req, res) => {
                `,
                attachments: [  
                 {
-                   filename: 'product.png',
+                   filename: 'ecomzone.gif',
                    path: imagePathFromDownloads,
                    cid: "product"
                 }
@@ -348,12 +348,39 @@ const fetchUser = async (req, res, next) => {
 // Creating EndPoint for Adding Products in CartData
 app.post('/addtocart', fetchUser, async (req, res) => {
     console.log("Added", req.body.itemId);
-    let userData = await Users.findOne({_id:req.user.id});
-    userData.cartData[req.body.itemId] += 1;
-    await Users.findOneAndUpdate({_id:req.user.id}, {cartData:userData.cartData});
-    res.send("Added");
-})
 
+    try {
+        // Fetch user data from the database
+        let userData = await Users.findOne({_id: req.user.id});
+
+        // Check if userData is found
+        if (!userData) {
+            return res.status(404).send("User not found");
+        }
+
+        // Initialize cartData if it doesn't exist
+        if (!userData.cartData) {
+            userData.cartData = {}; // Initialize cartData as an empty object
+        }
+
+        // Initialize the item count if it doesn't exist
+        if (!userData.cartData[req.body.itemId]) {
+            userData.cartData[req.body.itemId] = 0; // Initialize item count to 0
+        }
+
+        // Increment the item count
+        userData.cartData[req.body.itemId] += 1;
+
+        // Update the user's cartData in the database
+        await Users.findOneAndUpdate({_id: req.user.id}, {cartData: userData.cartData});
+
+        // Send a success response
+        res.send("Added");
+    } catch (error) {
+        console.error('Error adding item to cart:', error);
+        res.status(500).send('Error adding item to cart');
+    }
+});
 // Creating EndPoint to Remove Product from CartData 
 
 app.post('/removefromcart', fetchUser, async (req,res)=> {
