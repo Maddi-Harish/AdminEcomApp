@@ -248,9 +248,9 @@ app.post('/signup', async (req, res) => {
     });
 
 
-    const imagePath = path.join(__dirname, 'path', 'to', 'your', 'image.png');
+    // const imagePath = path.join(__dirname, 'path', 'to', 'your', 'image.png');
 
-    const imagePathFromDownloads = path.join('C:', 'Users', 'hp', 'Downloads', 'Ecom Zone.gif');
+    // const imagePathFromDownloads = path.join('C:', 'Users', 'hp', 'Downloads', 'Ecom Zone.gif');
 
     const mailOptions = {
         from: 'EcomZone <ecomzoneproject@gmail.com>',
@@ -264,12 +264,12 @@ app.post('/signup', async (req, res) => {
                </a>
                <h3 style="color: #333; font-size: 16px;">Check out our Latest Products: </h3>
                <h3 style="color: #666; font-size: 16px;">Best Regards, <br> EcomZone</h3>
-               <a href="https://ecomzone.netlify.app/kids"><button style="background-color: #f48a1d; color: white; font-size: 16px; border-radius: 4px; margin: 4px 2px; cursor: pointer; padding: 18px; border-width: 0px;"> Click Here to Buy »</button></a> 
+               <a href="https://ecomzone.netlify.app/kids"><button style="background-color: #f48a1d; color: white; font-size: 16px; border-radius: 4px; margin: 4px 2px; cursor: pointer; padding: 18px; border-width: 0px;"> Click Here »</button></a> 
                `,
                attachments: [  
                 {
                    filename: 'ecomzone.gif',
-                   path: imagePathFromDownloads,
+                   href: 'https://www.dropbox.com/scl/fi/7jcvuqhmeik9rfrbmy5hf/Beige-Minimalist-Casual-New-Collection-Bag-Desktop-Prototype-4.png?rlkey=r3n47myk0i09hn0exjq6maq3h&st=irwaoler&dl=1',
                    cid: "product"
                 }
         ]
